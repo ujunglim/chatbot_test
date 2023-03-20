@@ -1,17 +1,18 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 function Home() {
     const [apiKeyInput, setApiKeyInput] = useState("");
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    const navigate = useNavigate()
 
-    const handleChange = (e) => {
+    const handleChange = (e: any) => {
         setApiKeyInput(e.target.value);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: any) => {
         e.preventDefault();
-        setIsSubmitted(true);
-        // setApiKeyInput("");
+        localStorage.setItem('OPENAI_API_KEY', e.target[0].value);
+        navigate('/chat');
     }
 
     return (

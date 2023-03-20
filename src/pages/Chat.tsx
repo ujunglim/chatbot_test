@@ -10,7 +10,8 @@ interface MessageType {
     direction: string,
 }
 
-function Chat({apiKey}) {
+function Chat() {
+  const OPENAI_API_KEY = localStorage.getItem('OPENAI_API_KEY');
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -65,7 +66,7 @@ function Chat({apiKey}) {
     await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        "Authorization": "Bearer " + apiKey,
+        "Authorization": "Bearer " + OPENAI_API_KEY,
         "Content-Type": "application/json"
       },
       body: JSON.stringify(apiRequestBody)
